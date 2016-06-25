@@ -1,0 +1,8 @@
+# start service server called postgresql
+sudo service postgresql start
+# also: stop & restart as last argument
+
+# here we switch to and use new user 'ubuntu' which can be setup using postgres' interactive mode
+sudo sudo -u postgres createuser ubuntu --interactive
+# 'sudo sudo -u': as administrator do this: switch to user postgres (default postgres user) and do this: create user called ubuntu
+# alt expl: become the superuser, then become the postgres user, and finally run the command
