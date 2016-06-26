@@ -6,3 +6,6 @@ sudo service postgresql start
 sudo sudo -u postgres createuser ubuntu --interactive
 # 'sudo sudo -u': as administrator do this: switch to user postgres (default postgres user) and do this: create user called ubuntu
 # alt expl: become the superuser, then become the postgres user, and finally run the command
+
+# starts postgres 
+$ psql
