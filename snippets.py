@@ -1,6 +1,4 @@
-import logging
-import argparse
-import psycopg2
+import logging, argparse, psycopg2
 
 #set the log output file, and the log level
 logging.basicConfig(filename="snippets.log", level=logging.DEBUG)
@@ -29,16 +27,20 @@ def put(name, snippet):
 
 def get(name):
     """
-    Retrieve the snippet with a given name.
+    Returns the snippet with a given name.
     If there is no such snippet, return '404: Snippet Not Found'
-    Returns the snippet.
     """
     logging.info("Retrieving snippet {!r}.".format(name))
     cursor = connection.cursor()
     command = "select message from snippets where keyword = (%s)"
     cursor.execute(command, (name,))
-    snippet = cursor.fetchone()
+    row = cursor.fetchone() #MENTOR: Is row stored in cursor?
+    connection.commit() #MENTOR: Why use in get? 
     #logging.error("FIXME: Unimplemented - get({!r})".format(name))
+    if not row:
+        logging.debug("GET: {!r} was not found".format(name))
+        return "404: Snippet not found"
+    snippet = row[0]
     return snippet
 
     
